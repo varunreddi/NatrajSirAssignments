@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+	<bean id="dmds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://RN000036937:3306/aedevdb?serverTimezone=America/Chicago"></property>
+		<property name="username" value="ae_dev_rw"></property>
+		<property name="password" value="#}mAY4An"></property>
+	</bean>
+	
+	<bean id="cpDAO" class="com.varun.dao.CoronaPatientDAOImple">
+		<constructor-arg name="ds" ref="dmds"></constructor-arg>
+	</bean>
+	
+	<bean id="cpService" class="com.varun.service.CoronaPatientMgmtServiceImpl">
+		<constructor-arg name="dao" ref="cpDAO"></constructor-arg>
+	</bean>
+	
+	<bean id="controller" class="com.varun.controller.MainController">
+		<constructor-arg name="service" ref="cpService"></constructor-arg>
+	</bean>
+	
+	
+</beans>
